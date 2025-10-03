@@ -19,7 +19,10 @@ public class Main {
                 case 5 -> searchPost();
                 case 6 -> viewFollowers();
                 case 7 -> removeUser();
-                case 8 -> {
+                case 8-> removeFollower();
+                case 9 -> isFollower();
+                case 10 -> getAllUsers();
+                case 11 -> {
                     System.out.println("Exiting... Goodbye!");
                     sc.close();
                     return;
@@ -39,7 +42,10 @@ public class Main {
         System.out.println("5. Search Post by Keyword");
         System.out.println("6. View Followers of a User");
         System.out.println("7. Remove User");
-        System.out.println("8. Exit");
+        System.out.println("8. Remove Follower");
+        System.out.println("9. check follower");
+        System.out.println("10. View All Users");
+        System.out.println("11. Exit");
         System.out.print("Enter your choice: ");
     }
 
@@ -117,6 +123,50 @@ public class Main {
             System.out.println("User removed successfully!");
         } else {
             System.out.println("User not found!");
+        }
+    }
+    private static void removeFollower()
+        {
+        System.out.print("Enter user ID to remove follower: ");
+        int userId = sc.nextInt();
+        sc.nextLine();
+        User u = app.searchUser(userId);
+        if (u != null) {
+            System.out.print("Enter follower name: ");
+            String follower = sc.nextLine();
+            if (u.removeFollower(follower)) {
+                System.out.println("Follower removed!");
+            } else {
+                System.out.println("Follower does not exists!");
+            }
+        } else {
+            System.out.println("User not found!");
+        }
+        }
+    private static void isFollower()
+    {
+        System.out.print("Enter user ID to check follower: ");
+        int userId = sc.nextInt();
+        sc.nextLine();
+        User u = app.searchUser(userId);
+        if (u != null) {
+            System.out.print("Enter follower name: ");
+            String follower = sc.nextLine();
+            if (u.isFollower(follower)) {
+                System.out.println("is a Follower!");
+            } else {
+                System.out.println("not a follower");
+            }
+        } else {
+            System.out.println("User not found!");
+        }
+    }
+    private static void getAllUsers()
+    {
+        Map<Integer,User> map=app.getAllUsers();
+        for(int i: map.keySet())
+        {
+            System.out.println("user id: "+i+", userName: "+map.get(i).getUsername());
         }
     }
 }
