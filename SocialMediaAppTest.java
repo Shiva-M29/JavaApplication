@@ -29,7 +29,7 @@ public class SocialMediaAppTest {
         assertTrue(u1.addFollower("David"));
         assertTrue(u1.getFollowers().contains("David"));
 
-        // duplicate follower should not be added
+        
         assertFalse(u1.addFollower("David"));
     }
 
